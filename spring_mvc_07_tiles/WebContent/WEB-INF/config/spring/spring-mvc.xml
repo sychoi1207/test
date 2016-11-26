@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+		
+	<mvc:annotation-driven/>
+	<mvc:view-controller path="/main.do"	view-name="main.tiles"/>
+	<!-- 
+	@RequestMapping("/main.do")
+	public String mainPage(){
+		//Controller 로직 처리
+		return "main.tiles"; //타일즈 definition에 선언한 태그 식별값(name)를 리턴
+	}
+	 -->
+	<mvc:view-controller path="/join_form.do" view-name="member/join_form.tiles"/>
+	<mvc:view-controller path="/register_form.do" view-name="product/register_form.tiles"/>
+	<mvc:view-controller path="/no_tiles.do" view-name="/no_tiles.jsp"/>
+	
+	
+	<!-- 
+	Tiles 관련 설정
+		- TilesConfigurer 를 bean으로 등록 : Tiles 설정 파일을 등록하는 bean
+		- TilesViewResolver를 bean으로 등록 : Tiles View처리 해주는 View Resolver
+				(InternalResourceViewResolver를 같이 등록 시 먼저 호출 되도록 순서를 정한다.)
+	 -->
+	<bean name="tilesConfig" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/config/tiles/tiles-defs.xml</value>
+			</list>
+		</property>
+	</bean>
+	<bean name="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"
+			  p:order="1"/>
+	
+	<bean name="internalViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+			  p:order="2" p:prefix="/WEB-INF/view"/>
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
