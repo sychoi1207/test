@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC 
+		"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+		"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	<!-- 
+	<definition> : 하나의 페이지(View)를 설정하는 태그
+		속성 : name - 태그 식별자
+				 template - 템플릿 페이지(다른 jsp들을 담을 jsp)의 위치를 지정 : /로 시작하고 /는 application root 경로
+				 extends (생략가능) - 기존 설정(definition)의 내용을 상속 받아서 사용할 경우 상속받을 definition의 태그 식별자 설정
+		하위태그 : <put-attribute> - template 페이지에 포함시킬 페이지를 설정.
+				속성 : name - template 페이지에서 호출할 이름
+						 value - 페이지의 위치
+	 -->
+	 
+	 <definition name="template" template="/WEB-INF/view/layout/template.jsp">
+	 	<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp"/>
+	 	<put-attribute name="nav" value="/WEB-INF/view/layout/side_menu.jsp"/>
+	 	<put-attribute name="footer"  value="/WEB-INF/view/layout/footer.jsp"/>
+	 </definition>
+	 
+	 <!-- 
+	 	wild card( * ) 를 이용한 설정
+	 	definition의 name을 handler가 리턴하는 view-name을 이용해 만드는 방법
+	 		- definition에서 사용할 jsp 페이지를 view-name을 이용해 설정한다.
+	 	name="*" 를 사용 -> view-name의 문자열과 name의 형식에 맞춰 설정을 찾는다.
+	 	name="*/*.tiles" -> view-name : xxxxx/xxxxx.tiles
+	 		ex) member/join_form.tiles -> member가 첫번째 *에 join_form이 두번째 *에 대입된다.
+	  -->
+	  <definition name="*/*.tiles" extends="template">
+	  	<put-attribute name="body" value="/WEB-INF/view/body/{1}/{2}.jsp"/>
+	  </definition>
+	  <definition name="*.tiles" extends="template">
+	  	<put-attribute name="body" value="/WEB-INF/view/body/{1}.jsp"></put-attribute>
+	  
+	  </definition>
+	 
+<!-- 	 
+	<definition name="main.tiles" extends="template">
+		<put-attribute name="body" value="/WEB-INF/view/body/main.jsp"></put-attribute>
+	</definition>
+	
+	 가입 폼을 보여주는 페이지  설정
+	 <definition name="member/join_form.tiles" extends="template">
+	 <put-attribute name="header" value="/WEB-INF/view/layout/header222222.jsp"/> // 재정의
+	 	<put-attribute name="body" value="/WEB-INF/view/body/member/join_form.jsp"/>
+	 </definition>
+ -->
+	 
+	 
+	 
+	 
+	 
+</tiles-definitions>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
